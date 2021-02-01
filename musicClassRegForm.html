@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body, html 
+{
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+}
+
+* 
+{
+  box-sizing: border-box;
+}
+
+.bg-img {
+  background-image: url("piano.jpg");
+  height: 210%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  
+}
+
+.bg-img .fbtn {
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.vcontainer{
+  position: relative;
+}
+
+.video{
+    top: 10px;
+    left: 300px;
+    position: absolute;
+    opacity: 0.9;
+}
+.fobtn{
+  left: 300px;
+  position: absolute;
+}
+
+input[type=text],input[type=date], input[type=email],input[type=tel], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 100%;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+span
+{
+  color: red;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+}
+
+input[type=submit]:hover {
+  
+}
+/* Set a style for all buttons */
+button {
+ background-color: #7a7a52;
+  color: white;
+  border-radius: 5px;
+  padding: 20px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1.0;
+  left: 500px; 
+}
+
+button:hover {
+  background-color: #4d4d33;
+}
+
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+h1{
+  color: white;
+  text-shadow: 2px 0 black,2px 0 black,2px 0 black,2px 0 black;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* To Keep on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+  background-image: url("piano.jpg");
+}
+
+/* Modal Content/Box */
+.modal-content {
+  position: relative;
+  border-radius: 10px;
+  top: 1px;
+  left: 500px;
+  margin: 15px;
+  max-width: 30%;
+  padding: 10px;
+  background:#55552b;
+  opacity: 0.8;
+  color:white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+</style>
+
+<body>
+<div class = "bg-img">
+  <h1>Jayson Music School</h1>
+  <div class="vcontainer">
+    <div class="video">
+  <video width="720" height="480" autoplay controls loop>
+  <source src="music_sheet.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+  </video><br>
+  <button class="fobtn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Register</button>
+</div>
+</div>
+
+
+</div>
+
+<div id="id01" class="modal" >
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  
+    <form action="reg_post.php" class="modal-content" onSubmit="formValidation()" method="POST">
+    <div class="container"> 
+    <div class="row">
+    <label for="name"><b>Name</b></label><br> 
+    <input type="text" id="name" name="name" placeholder="Name" maxlength="20" onblur="checkName()"  required><br>
+    <label for="dob"><b>Date Of Birth</b></label><br>
+    <input type="date" id="dob" name="dob" placeholder="Date Of Birth"><br>
+    <label for="phone"><b>Phone number</b></label><span id="conerror"></span><br>
+        <input type="tel" id="phone" name="phone" placeholder="Phone number" maxlength="10" onblur="contactnum()"required><br>
+        <label for="email"><b>E-mail</b></label><br>
+        <input type="email" id="email" name="email" placeholder="E-mail" ><br>
+        <label for="instrument"><b>Select Choice of Instrument</b></label><br>
+        <select id="instrument" name="instrument" ><br>
+          <option value="" disabled selected hidden>Choose an Instrument</option>
+          <option value="guitar">Guitar</option>
+          <option value="keyboard">Keyboard</option>
+          <option value="violin">Violin</option>
+          <option value="bass">Bass</option>
+          <option value="drums">Drums</option>
+          <option value="vocals">Vocals</option>
+        </select>
+        <label for="days"><b>Pick Days for Classes</b></label><br>
+                   <input type="checkbox" id="sunday" name="day[]" value="Sunday">
+                   <label class="day" for="sunday"> Sunday</label><br>
+                   <input type="checkbox" id="monday" name="day[]" value="Monday">
+                   <label class="day" for="monday"> Monday</label><br>
+                   <input type="checkbox" id="tuesday" name="day[]" value="Tuesday">
+                   <label class="day" for="tuesday"> Tuesday</label><br>
+                   <input type="checkbox" id="wednesday" name="day[]" value="Wednesday">
+                   <label class="day" for="wednesday"> Wednesday</label><br>
+                   <input type="checkbox" id="thursday" name="day[]" value="Thursday">
+                   <label class="day" for="thursday"> Thursday</label><br>
+                   <input type="checkbox" id="friday" name="day[]" value="Friday">
+                   <label class="day" for="friday"> Friday</label><br>
+                   <input type="checkbox" id="saturday" name="day[]" value="Saturday">
+                   <label class="day" for="saturday"> Saturday</label><br>
+        </div>          
+        <label for="start"><b>Choose Start Date & Time</b></label><br>           
+        <input id="start" type="datetime-local" name="start"max="2020-06-01" onblur="checkStart()" required><br>
+        <label for="comments"><b>Comments</b></label><br>
+        <textarea id="comments" name="comments" placeholder="Write some comment.." style="height:200px"></textarea><br><br>
+        <div class="clearfix">
+        <button type="submit">Register</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+  </script>
+</script>
+<script type="text/javascript" src="script.js"></script>"
+</body>
+</html>
